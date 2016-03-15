@@ -27,7 +27,6 @@ RUN set -x \
     && chown -R daemon:daemon  "${JIRA_INSTALL}/temp" \
     && chown -R daemon:daemon  "${JIRA_INSTALL}/work" \
     && touch -d "@0"           "/opt/atlassian/jira/conf/server.xml" \
-    && sed --in-place          "s/java version/openjdk version/g" "${JIRA_INSTALL}/bin/check-java.sh" \
     && echo -e                 "\njira.home=$JIRA_HOME" >> "${JIRA_INSTALL}/atlassian-jira/WEB-INF/classes/jira-application.properties"
 
 # Use the default unprivileged account. This could be considered bad practice
@@ -36,7 +35,7 @@ RUN set -x \
 USER daemon:daemon
 
 # Expose default HTTP connector port.
-EXPOSE 8080
+EXPOSE 8084
 
 # Set volume mount points for installation and home directory. Changes to the
 # home directory needs to be persisted as well as parts of the installation
